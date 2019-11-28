@@ -340,3 +340,54 @@ linksContact.forEach(linkContact => {
         scrollToElement(sectionContact.offsetTop)
     })
 })
+
+
+/* client carousel strip */
+
+const clientsScrollableStrip = document.querySelector(".clients-strip")
+const clientsContainer = document.querySelector(".clients-strip__container")
+const clientImgs = document.querySelectorAll(".clients-strip__img")
+const clientsCarouselNextBtn = document.querySelector(".clients-next")
+const clientsCarouselPrevBtn = document.querySelector(".clients-prev")
+
+clientsCarouselNextBtn.addEventListener("click", () => {
+    scrollClientStrip(clientsScrollableStrip.clientWidth)
+
+    //wait until scroll finished
+    setTimeout(() => {
+        //if at end od carousel, make button disabled
+        if (((clientsScrollableStrip.scrollLeft + 50) + clientsScrollableStrip.clientWidth) >= clientsContainer.clientWidth) {
+            if (!clientsCarouselNextBtn.classList.contains("is-disabled")) {
+                clientsCarouselNextBtn.classList += " is-disabled"
+            }
+        }
+    }, 500);
+    clientsCarouselPrevBtn.classList.remove("is-disabled")
+})
+clientsCarouselPrevBtn.addEventListener("click", () => {
+    scrollClientStrip(-clientsScrollableStrip.clientWidth)
+
+    //wait until scroll finished
+    setTimeout(() => {
+        //if at end od carousel, make button disabled
+        if (clientsScrollableStrip.scrollLeft <= 50) {
+            if (!clientsCarouselPrevBtn.classList.contains("is-disabled")) {
+                clientsCarouselPrevBtn.classList += " is-disabled"
+            }
+        }
+    }, 500);
+    clientsCarouselNextBtn.classList.remove("is-disabled")
+})
+
+//last client image visible to right
+let clientIndex = 5;
+function scrollClientStrip(xAmount) {
+    clientsScrollableStrip.scrollBy({
+        top: 0,
+        left: xAmount,
+        behavior: 'smooth'
+    });
+}
+
+
+
