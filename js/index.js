@@ -216,7 +216,6 @@ window.addEventListener("resize", () => {
     if (window.innerWidth <= 767) {
         profileSlides.forEach((slide, i) => {
             if (slide.classList.contains("is-showing")) {
-                console.log(profileTexts[i].clientHeight)
                 profileContainer.style.height = (670 + profileTexts[i].clientHeight) + "px";
             }
         })
@@ -305,3 +304,39 @@ galleryPrev.addEventListener("click", function (e) {
     });
     if (galleryImages[currIndex - 1]) galleryImages[currIndex - 1].className += " is-expanded"; else galleryImages[galleryImages.length - 1].className += " is-expanded";
 }); //lazy loaded youtube embeds with preview
+
+function scrollToElement(yPos) {
+    window.scrollTo({
+        top: yPos,
+        behavior: "smooth"
+    })
+}
+const linksAbout = document.querySelectorAll("[data-js='link-about']")
+const linksEvents = document.querySelectorAll("[data-js='link-events']")
+const linksTestimonials = document.querySelectorAll("[data-js='link-testimonials']")
+const linksContact = document.querySelectorAll("[data-js='link-contact']")
+const sectionAbout = document.querySelector(".profile")
+const sectionEvents = document.querySelector(".events")
+const sectionTestimonials = document.querySelector(".testimonials")
+const sectionContact = document.querySelector(".contact")
+
+linksAbout.forEach(linkAbout => {
+    linkAbout.addEventListener("click", () => {
+        scrollToElement(sectionAbout.offsetTop)
+    })
+})
+linksEvents.forEach(linkEvents => {
+    linkEvents.addEventListener("click", () => {
+        scrollToElement(sectionEvents.offsetTop)
+    })
+})
+linksTestimonials.forEach(linkTestimonials => {
+    linkTestimonials.addEventListener("click", () => {
+        scrollToElement(sectionTestimonials.offsetTop)
+    })
+})
+linksContact.forEach(linkContact => {
+    linkContact.addEventListener("click", () => {
+        scrollToElement(sectionContact.offsetTop)
+    })
+})
